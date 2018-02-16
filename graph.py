@@ -6,16 +6,20 @@ Created by prasanthtootcat
 import networkx as nx
 import pylab
 
-def graphPlotter():
+def graphPlotter(tokenizedInput,graphDict):
 	G = nx.Graph()
-	G.add_edge(1, 2, weight=3)
-	G.add_edge(2, 3, weight=5)
-	G.add_edge(1,3, weight=20)
+	print(graphDict)
+	for i in graphDict:
+		G.add_edge(i[0],i[1])
+		G[i[0]][i[1]]['weight'] = graphDict[i]
+	labels={}
+	k=0
+	for str in tokenizedInput:
+		labels[k]=str
+		k+=1
 	pos=nx.spring_layout(G)
 	pylab.figure(2)
 	nx.draw(G,pos)
-	nx.draw_networkx_labels(G,pos)
-	edge_labels=dict([((u,v,),d['weight'])
-                 for u,v,d in G.edges(data=True)])
-	nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels)
+	nx.draw_networkx_labels(G,pos,labels)
+	nx.draw_networkx_edge_labels(G,pos,edge_labels=graphDict)
 	pylab.show()
