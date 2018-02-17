@@ -14,11 +14,30 @@ def graphPlotter(tokenizedInput,graphDict,corpusCountDict):
 		num = graphDict[i] / corpusCountDict[tokenizedInput[i[0]]]
 		G[i[0]][i[1]]['weight'] = num
 
-	labels={}
+	labels = {}
+	nodes = []
+	toBeDeleted = []
 	k=0
 	for string in tokenizedInput:
 		labels[k] = string
 		k+=1
+
+	for i in graphDict:
+		if i[0] not in nodes:
+			nodes.append(i[0])
+		if i[1] not in nodes:
+			nodes.append(i[1])
+
+	for n in labels:
+		if n not in nodes:
+			toBeDeleted.append(n)
+
+	for n in toBeDeleted:
+		if n in labels:
+			del(labels[n])
+
+
+	print(labels)
 
 	print("\nCount of word occurances...\n")
 	for i in graphDict:
