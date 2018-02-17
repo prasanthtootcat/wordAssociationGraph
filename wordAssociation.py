@@ -15,17 +15,14 @@ tokenizedInput = nltk.tokenize.word_tokenize(userInput)
 inputLen = len(tokenizedInput)
 corpusLen = len(tokenizedCorpus)
 
-print(tokenizedCorpus)
-
-
 for i in range(0,inputLen):
 	for j in range(0,corpusLen):
 		if tokenizedInput[i] == tokenizedCorpus[j] and j+1<corpusLen:
 			for k in range(0,inputLen):
 				if tokenizedCorpus[j+1] == tokenizedInput[k]:
-					wordAssociation.append((i,k))
+					if i!=k :
+						wordAssociation.append((i,k))
 
-graphDict=collections.Counter(wordAssociation)
-print(graphDict)
-
-graph.graphPlotter(tokenizedInput,graphDict)
+corpusCountDict = collections.Counter(tokenizedCorpus)
+graphDict = collections.Counter(wordAssociation)
+graph.graphPlotter(tokenizedInput,graphDict,corpusCountDict)
