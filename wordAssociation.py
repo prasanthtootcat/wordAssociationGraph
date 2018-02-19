@@ -25,4 +25,13 @@ for i in range(0,inputLen):
 
 corpusCountDict = collections.Counter(tokenizedCorpus)
 graphDict = collections.Counter(wordAssociation)
-graph.graphPlotter(tokenizedInput,graphDict,corpusCountDict)
+graphDictSortedList = sorted(graphDict,reverse=True)
+
+inputCountDict = collections.Counter(tokenizedInput)
+
+print("\nCount of occurance of each word in corpus corresponding to the input")
+
+for i in inputCountDict:
+	print("%s occurs %d times"%(i,corpusCountDict[i]))
+
+graph.graphPlotter(tokenizedInput,graphDict,corpusCountDict,graphDictSortedList)

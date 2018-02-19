@@ -6,10 +6,10 @@ Created by prasanthtootcat
 import networkx as nx
 import pylab
 
-def graphPlotter(tokenizedInput,graphDict,corpusCountDict):
+def graphPlotter(tokenizedInput,graphDict,corpusCountDict,graphDictSortedList):
 	G = nx.Graph()
 
-	for i in graphDict:
+	for i in graphDictSortedList:
 		G.add_edge(i[0],i[1])
 		num = graphDict[i] / corpusCountDict[tokenizedInput[i[0]]]
 		G[i[0]][i[1]]['weight'] = num
@@ -36,16 +36,13 @@ def graphPlotter(tokenizedInput,graphDict,corpusCountDict):
 		if n in labels:
 			del(labels[n])
 
-
-	print(labels)
-
 	print("\nCount of word occurances...\n")
-	for i in graphDict:
+	for i in graphDictSortedList:
 		print("\"%s\" after \"%s\" is %d" %(labels[i[1]],labels[i[0]],graphDict[i]))
 
 
 	print("\nProbability of word occurances...\n")
-	for i in graphDict:
+	for i in graphDictSortedList:
 		print("\"%s\" after \"%s\" is %f" %(labels[i[1]],labels[i[0]],graphDict[i] / corpusCountDict[tokenizedInput[i[0]]]))
 
 
