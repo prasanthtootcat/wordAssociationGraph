@@ -4,13 +4,27 @@ Created by prasanthtootcat
 '''
 
 import nltk,graph,collections
+from nltk.corpus import stopwords
 
 wordAssociation = []
+tokenizedInput = []
+tokenizedCorpus = []
+stopWords=set(stopwords.words('english'))
 location=input("Enter the corpus file location\n")
 corpus = open(location, "r")
-tokenizedCorpus = nltk.tokenize.word_tokenize(corpus.read())
+tokenizedCorpusNotPreprocessed = nltk.tokenize.word_tokenize(corpus.read())
 userInput = input("Enter the sentence to form Word Association Graph\n")
-tokenizedInput = nltk.tokenize.word_tokenize(userInput)
+tokenizedInputNotPreprocessed = nltk.tokenize.word_tokenize(userInput)
+
+for w in tokenizedCorpusNotPreprocessed:
+	wLower = w.lower()
+	if wLower not in stopWords:
+		tokenizedCorpus.append(wLower);
+
+for w in tokenizedInputNotPreprocessed:
+	wLower = w.lower()
+	if wLower not in stopWords:
+		tokenizedInput.append(wLower);
 
 inputLen = len(tokenizedInput)
 corpusLen = len(tokenizedCorpus)
